@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.2.0...v0.3.0) (2023-06-27)
+
+
+### Features
+
+* add validation workflow ([#7](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/7)) ([f64c6c0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/f64c6c073045a191a522a3424b1bd64317f1ecd2))
+
 ## [0.2.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.1.0...v0.2.0) (2023-06-27)
 
 
