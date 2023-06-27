@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.1.0...v0.2.0) (2023-06-27)
+
+
+### Features
+
+* **documentation:** update documentation ([#6](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/6)) ([477e674](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/477e67460cf9959fd808bc98dfbea89ef93ef85b))
+* **tests:** add initial deployment tests ([#4](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/4)) ([aba3c9c](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/aba3c9c8b704cb040ae0567abeea0355cdeb2aac))
+
 ## 0.1.0 (2023-06-27)
 
 
