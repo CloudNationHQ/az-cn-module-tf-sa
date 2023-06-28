@@ -21,7 +21,7 @@ jobs:
             fix
             feat
           ignoreLabels: |
-            autorelease
+            autorelease:pending
             dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
