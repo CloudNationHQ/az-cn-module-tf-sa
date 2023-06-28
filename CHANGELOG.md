@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.3.0...v0.4.0) (2023-06-28)
+
+
+### Features
+
+* **deps:** bump actions/setup-go from 3 to 4 ([#9](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/9)) ([18503f6](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/18503f6d55f1af4cb66bc4c28d36a87918995de1))
+
 ## [0.3.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.2.0...v0.3.0) (2023-06-27)
 
 
