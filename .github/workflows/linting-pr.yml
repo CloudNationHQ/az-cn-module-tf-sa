@@ -20,8 +20,9 @@ jobs:
           types: |
             fix
             feat
+            chore
           ignoreLabels: |
-            autorelease:pending
+            autorelease
             dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
