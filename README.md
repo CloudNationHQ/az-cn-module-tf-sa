@@ -330,11 +330,11 @@ Before running these tests, ensure that both Go and Terraform are installed on y
 
 ## Authors
 
-Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/az-module-tf-sa/graphs/contributors).
+Module is maintained by [these awesome contributors](https://github.com/cloudnationhq/az-cn-module-tf-sa/graphs/contributors).
 
 ## License
 
-MIT Licensed. See [LICENSE](https://github.com/aztfmods/module-azurerm-vnet/blob/main/LICENSE) for full details.
+MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/az-cn-module-tf-sa/blob/main/LICENSE) for full details.
 
 ## References
 
