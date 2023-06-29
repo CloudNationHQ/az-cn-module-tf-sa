@@ -8,6 +8,6 @@ on:
       - synchronize
 
 jobs:
-  shared:
-    name: linting
+  linting:
+    name: shared
     uses: cloudnationhq/az-cn-shared-tf-workflows/.github/workflows/linting.yml@main
