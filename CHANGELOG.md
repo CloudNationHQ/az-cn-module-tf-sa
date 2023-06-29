@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.5.0...v0.6.0) (2023-06-29)
+
+
+### Features
+
+* resolve linting issues ([#17](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/17)) ([c4d803b](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/c4d803b4c1f7fc99e9684458cd22048423e5ff77))
+
 ## [0.5.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.4.0...v0.5.0) (2023-06-29)
 
 
