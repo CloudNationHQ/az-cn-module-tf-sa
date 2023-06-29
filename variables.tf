@@ -1,3 +1,9 @@
-variable "storage" {}
-variable "workload" {}
-variable "environment" {}
+variable "storage" {
+  type = any
+}
+variable "workload" {
+  type = string
+}
+variable "environment" {
+  type = string
+}
