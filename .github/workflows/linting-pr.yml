@@ -1,15 +1,13 @@
 name: "linting"
 
-#on:
-#  pull_request_target:
-#    types:
-#      - opened
-#      - edited
-#      - synchronize
 on:
-  workflow_dispatch:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
 
 jobs:
   linting:
     name: linting
-    uses: cloudnationhq/az-cn-shared-tf-workflows/.github/workflows/linting.yml@feat/add-tflinting
+    uses: cloudnationhq/az-cn-shared-tf-workflows/.github/workflows/linting.yml@main
