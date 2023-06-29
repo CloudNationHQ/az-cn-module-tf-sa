@@ -1,4 +1,4 @@
-#name: "linting"
+name: "linting"
 
 on:
   pull_request_target:
@@ -9,6 +9,5 @@ on:
 
 jobs:
   linting:
-    #name: linting
+    name: shared
     uses: cloudnationhq/az-cn-shared-tf-workflows/.github/workflows/linting.yml@main
-
