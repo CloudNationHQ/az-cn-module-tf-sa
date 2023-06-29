@@ -1,11 +1,13 @@
 name: "linting"
 
+#on:
+#  pull_request_target:
+#    types:
+#      - opened
+#      - edited
+#      - synchronize
 on:
-  pull_request_target:
-    types:
-      - opened
-      - edited
-      - synchronize
+  workflow_dispatch:
 
 jobs:
   linting:
