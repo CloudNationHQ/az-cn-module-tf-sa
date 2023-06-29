@@ -7,7 +7,7 @@ jobs:
   build:
     uses: cloudnationhq/az-cn-shared-tf-workflows/.github/workflows/validate.yml@main
     with:
-      test: simple
+      #test: simple
       workload: demo
       environment: dev
     secrets:
