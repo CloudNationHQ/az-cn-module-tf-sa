@@ -1,5 +1,5 @@
 variable "storage" {
-  type = object({})
+  type = any
 }
 variable "workload" {
   type = string
