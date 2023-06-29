@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.4.0...v0.5.0) (2023-06-29)
+
+
+### Features
+
+* workflow refactor ([#11](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/11)) ([c46cccf](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/c46cccfdcaf518dc37d89c415b851ff3a0b46146))
+
 ## [0.4.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.3.0...v0.4.0) (2023-06-28)
 
 
