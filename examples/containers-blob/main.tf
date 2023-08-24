@@ -2,13 +2,18 @@ provider "azurerm" {
   features {}
 }
 
+module "naming" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-naming"
+
+  suffix = ["demo", "dev"]
+}
+
 module "rg" {
   source = "github.com/cloudnationhq/az-cn-module-tf-rg"
 
-  environment = var.environment
-
   groups = {
     demo = {
+      name   = module.naming.resource_group.name
       region = "westeurope"
     }
   }
@@ -17,10 +22,10 @@ module "rg" {
 module "storage" {
   source = "../../"
 
-  workload    = var.workload
-  environment = var.environment
+  naming = local.naming
 
   storage = {
+    name          = module.naming.storage_account.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
 
@@ -40,13 +45,6 @@ module "storage" {
           exposed_headers    = ["x-ms-meta-*"]
           max_age_in_seconds = "200"
         }
-        rule2 = {
-          allowed_headers    = ["x-ms-meta-data*", "x-ms-meta-target*"]
-          allowed_methods    = ["GET"]
-          allowed_origins    = ["http://www.contoso.com"]
-          exposed_headers    = ["x-ms-meta-*"]
-          max_age_in_seconds = "200"
-        }
       }
 
       policy = {
@@ -57,9 +55,13 @@ module "storage" {
     }
 
     containers = {
-      sc1 = { name = "sc1", access_type = "private" }
-      sc2 = { name = "sc2", access_type = "blob" }
+      sc1 = {
+        access_type = "private"
+        metadata = {
+          project = "PRJ-1234"
+          owner   = "marketing team"
+        }
+      }
     }
   }
-  depends_on = [module.rg]
 }

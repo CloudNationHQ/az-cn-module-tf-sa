@@ -2,13 +2,18 @@ provider "azurerm" {
   features {}
 }
 
+module "naming" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-naming"
+
+  suffix = ["demo", "dev"]
+}
+
 module "rg" {
   source = "github.com/cloudnationhq/az-cn-module-tf-rg"
 
-  environment = var.environment
-
   groups = {
     demo = {
+      name   = module.naming.resource_group.name
       region = "westeurope"
     }
   }
@@ -17,18 +22,9 @@ module "rg" {
 module "storage" {
   source = "../../"
 
-  workload    = var.workload
-  environment = var.environment
-
   storage = {
+    name          = module.naming.storage_account.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
-
-    enable = {
-      sftp   = true
-      is_hns = true
-    }
   }
-  depends_on = [module.rg]
 }
-

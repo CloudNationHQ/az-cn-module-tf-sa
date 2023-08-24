@@ -1,15 +1,6 @@
-# generate random id
-resource "random_string" "random" {
-  length    = 3
-  min_lower = 3
-  special   = false
-  numeric   = false
-  upper     = false
-}
-
 # storage accounts
 resource "azurerm_storage_account" "sa" {
-  name                     = "sa${var.workload}${var.environment}${random_string.random.result}"
+  name                     = var.storage.name
   resource_group_name      = var.storage.resourcegroup
   location                 = var.storage.location
   account_tier             = try(var.storage.sku.tier, "Standard")
@@ -186,6 +177,7 @@ resource "azurerm_storage_container" "sc" {
   name                  = each.value.name
   storage_account_name  = each.value.storage_account_name
   container_access_type = each.value.container_access_type
+  metadata              = each.value.metadata
 }
 
 # queues
@@ -196,6 +188,7 @@ resource "azurerm_storage_queue" "sq" {
 
   name                 = each.value.name
   storage_account_name = each.value.storage_account_name
+  metadata             = each.value.metadata
 }
 
 # shares
@@ -207,6 +200,7 @@ resource "azurerm_storage_share" "sh" {
   name                 = each.value.name
   storage_account_name = each.value.storage_account_name
   quota                = each.value.quota
+  metadata             = each.value.metadata
 }
 
 # tables
