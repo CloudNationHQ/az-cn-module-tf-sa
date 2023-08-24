@@ -26,41 +26,10 @@ The below examples shows the usage when consuming the module:
 module "storage" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa"
 
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
-
   storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    enable = {
-      sftp   = true
-      is_hns = true
-    }
-  }
-  depends_on = [module.rg]
-}
-```
-
-## Usage: tables
-
-```hcl
-module "storage" {
-  source = "github.com/cloudnationhq/az-cn-module-tf-sa"
-
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
-
-  storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    tables = {
-      t1 = { name = "table1" }
-      t2 = { name = "table2" }
-    }
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
   }
 }
 ```
@@ -71,13 +40,12 @@ module "storage" {
 module "storage" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa"
 
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
+  naming = local.naming
 
   storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     queue_properties = {
       logging = {
@@ -107,11 +75,15 @@ module "storage" {
     }
 
     queues = {
-      q1 = { name = "queue1" }
-      q2 = { name = "queue2" }
+      q1 = {
+        metadata = {
+          environment = "dev"
+          owner       = "finance team"
+          purpose     = "transaction_processing"
+        }
+      }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -121,13 +93,12 @@ module "storage" {
 module "storage" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa"
 
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
+  naming = local.naming
 
   storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     blob_properties = {
       enable = {
@@ -145,13 +116,6 @@ module "storage" {
           exposed_headers    = ["x-ms-meta-*"]
           max_age_in_seconds = "200"
         }
-        rule2 = {
-          allowed_headers    = ["x-ms-meta-data*", "x-ms-meta-target*"]
-          allowed_methods    = ["GET"]
-          allowed_origins    = ["http://www.contoso.com"]
-          exposed_headers    = ["x-ms-meta-*"]
-          max_age_in_seconds = "200"
-        }
       }
 
       policy = {
@@ -162,11 +126,15 @@ module "storage" {
     }
 
     containers = {
-      sc1 = { name = "sc1", access_type = "private" }
-      sc2 = { name = "sc2", access_type = "blob" }
+      sc1 = {
+        access_type = "private"
+        metadata = {
+          project = "PRJ-1234"
+          owner   = "marketing team"
+        }
+      }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -176,13 +144,12 @@ module "storage" {
 module "storage" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa"
 
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
+  naming = local.naming
 
   storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     share_properties = {
       smb = {
@@ -203,17 +170,21 @@ module "storage" {
         }
       }
 
-     policy = {
+      policy = {
         retention_in_days = 8
       }
     }
 
     shares = {
-      fs1 = { name = "share1", quota = 50 }
-      fs2 = { name = "share2", quota = 10 }
+      fs1 = {
+        quota = 50
+        metadata = {
+          environment = "dev"
+          owner       = "finance team"
+        }
+      }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -223,13 +194,12 @@ module "storage" {
 module "storage" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa"
 
-  workload       = var.workload
-  environment    = var.environment
-  location_short = module.region.location_short
+  naming = local.naming
 
   storage = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     enable = {
       management_policy = true
@@ -300,7 +270,6 @@ module "storage" {
       }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -309,7 +278,6 @@ module "storage" {
 | Name | Type |
 | :-- | :-- |
 | [azurerm_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
-| [random_string](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [azurerm_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_storage_queue](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_queue) | resource |
@@ -323,8 +291,7 @@ module "storage" {
 | Name | Description | Type | Required |
 | :-- | :-- | :-- | :-- |
 | `storage` | describes storage related configuration | object | yes |
-| `workload` | contains the workload name used, for naming convention	| string | yes |
-| `environment` | contains shortname of the environment used for naming convention	| string | yes |
+| `naming` | contains naming convention	| string | yes |
 
 ## Outputs
 
