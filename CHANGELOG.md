@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.6.0...v0.7.0) (2023-08-24)
+
+
+### Features
+
+* add consistent naming and cleanups ([#30](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/30)) ([f58216d](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/f58216dffd83e74a2dfadd920e716ded9911f647))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#19](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/19)) ([ce40be3](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/ce40be3934218fd992cc0f6e5c357fb011cc0666))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#26](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/26)) ([f1f6b6c](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/f1f6b6c54a962a54df8beccb9a07dde13ca53c0d))
+* **deps:** bump google.golang.org/grpc from 1.51.0 to 1.53.0 in /tests ([#20](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/20)) ([b262a39](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/b262a397d344ea7b19793f7dbc09aa90a0e3644c))
+
 ## [0.6.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.5.0...v0.6.0) (2023-06-29)
 
 
