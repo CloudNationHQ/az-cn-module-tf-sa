@@ -87,7 +87,7 @@ resource "azurerm_storage_account" "sa" {
         versions                        = try(var.storage.share_properties.smb.versions, [])
         authentication_types            = try(var.storage.share_properties.smb.authentication_types, [])
         channel_encryption_type         = try(var.storage.share_properties.smb.channel_encryption_type, [])
-        multichannel_enabled            = try(var.storage.share_properties.smb.multichannel_enabled, null)
+        multichannel_enabled            = try(var.storage.share_properties.smb.multichannel_enabled, false)
         kerberos_ticket_encryption_type = try(var.storage.share_properties.smb.kerb_ticket_encryption_type, [])
       }
     }
