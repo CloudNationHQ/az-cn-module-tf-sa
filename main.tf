@@ -78,14 +78,21 @@ resource "azurerm_storage_account" "sa" {
       days = try(var.storage.share_properties.retention_in_days, 7)
     }
 
-    smb {
-      versions                        = try(var.storage.share_properties.smb.versions, [])
-      authentication_types            = try(var.storage.share_properties.smb.authentication_types, [])
-      channel_encryption_type         = try(var.storage.share_properties.smb.channel_encryption_type, [])
-      multichannel_enabled            = try(var.storage.share_properties.smb.multichannel_enabled, null)
-      kerberos_ticket_encryption_type = try(var.storage.share_properties.smb.kerb_ticket_encryption_type, [])
+    dynamic "smb" {
+      for_each = {
+        for k, v in try(var.storage.share_properties.smb, {}) : k => v
+      }
+
+      content {
+        versions                        = try(var.storage.share_properties.smb.versions, [])
+        authentication_types            = try(var.storage.share_properties.smb.authentication_types, [])
+        channel_encryption_type         = try(var.storage.share_properties.smb.channel_encryption_type, [])
+        multichannel_enabled            = try(var.storage.share_properties.smb.multichannel_enabled, null)
+        kerberos_ticket_encryption_type = try(var.storage.share_properties.smb.kerb_ticket_encryption_type, [])
+      }
     }
   }
+
 
   queue_properties {
     dynamic "cors_rule" {
