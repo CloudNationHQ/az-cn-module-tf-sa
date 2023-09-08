@@ -79,9 +79,7 @@ resource "azurerm_storage_account" "sa" {
     }
 
     dynamic "smb" {
-      for_each = {
-        for k, v in try(var.storage.share_properties.smb, {}) : k => v
-      }
+      for_each = try(var.storage.share_properties.smb, null) != null ? [1] : []
 
       content {
         versions                        = try(var.storage.share_properties.smb.versions, [])
