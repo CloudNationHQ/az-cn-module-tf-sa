@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.7.0...v0.8.0) (2023-09-08)
+
+
+### Features
+
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#31](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/31)) ([e4a0ffb](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/e4a0ffb9d7bacfa16221024b39349e92fc4dfac7))
+
 ## [0.7.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.6.0...v0.7.0) (2023-08-24)
 
 
