@@ -1,6 +1,6 @@
 locals {
   containers = flatten([
-    for sc_key, sc in try(var.storage.containers, {}) : {
+    for sc_key, sc in try(var.storage.blob_properties.containers, {}) : {
 
       sc_key                = sc_key
       name                  = "${var.naming.storage_container}-${sc_key}"
@@ -13,7 +13,7 @@ locals {
 
 locals {
   shares = flatten([
-    for fs_key, fs in try(var.storage.shares, {}) : {
+    for fs_key, fs in try(var.storage.share_properties.shares, {}) : {
 
       fs_key               = fs_key
       name                 = "${var.naming.storage_share}-${fs_key}"
@@ -26,7 +26,7 @@ locals {
 
 locals {
   queues = flatten([
-    for sq_key, sq in try(var.storage.queues, {}) : {
+    for sq_key, sq in try(var.storage.queue_properties.queues, {}) : {
 
       sq_key               = sq_key
       name                 = "${var.naming.storage_queue}-${sq_key}"
