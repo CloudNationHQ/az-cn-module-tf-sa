@@ -30,36 +30,20 @@ module "storage" {
     resourcegroup = module.rg.groups.demo.name
 
     blob_properties = {
-      enable = {
-        versioning       = true
-        last_access_time = true
-        change_feed      = true
-        restore_policy   = true
-      }
+      versioning               = true
+      last_access_time         = true
+      change_feed              = true
+      restore_policy           = true
+      delete_retention_in_days = 8
+      restore_in_days          = 7
 
-      cors_rules = {
-        rule1 = {
-          allowed_headers    = ["x-ms-meta-data*", "x-ms-meta-target*"]
-          allowed_methods    = ["POST", "GET"]
-          allowed_origins    = ["http://www.fabrikam.com"]
-          exposed_headers    = ["x-ms-meta-*"]
-          max_age_in_seconds = "200"
-        }
-      }
-
-      policy = {
-        delete_retention_in_days           = 8
-        restore_in_days                    = 7
-        container_delete_retention_in_days = 8
-      }
-    }
-
-    containers = {
-      sc1 = {
-        access_type = "private"
-        metadata = {
-          project = "PRJ-1234"
-          owner   = "marketing team"
+      containers = {
+        sc1 = {
+          access_type = "private"
+          metadata = {
+            project = "marketing"
+            owner   = "marketing team"
+          }
         }
       }
     }

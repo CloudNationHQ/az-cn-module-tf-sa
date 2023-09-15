@@ -22,29 +22,19 @@ module "rg" {
 module "storage" {
   source = "../../"
 
-  naming = local.naming
-
   storage = {
-    name          = module.naming.storage_account.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
-
-    enable = {
-      management_policy = true
-      threat_protection = true
-    }
+    name              = module.naming.storage_account.name_unique
+    location          = module.rg.groups.demo.location
+    resourcegroup     = module.rg.groups.demo.name
+    threat_protection = true
 
     blob_properties = {
-      enable = {
-        last_access_time = true
-      }
+      last_access_time = true
     }
 
-    mgt_policies = {
+    mgt_policy = {
       rules = {
-        rule_1 = {
-          name    = "rule1"
-          enabled = true
+        rule1 = {
           filters = {
             filter_specs = {
               prefix_match = ["container1/prefix1"]
@@ -75,9 +65,7 @@ module "storage" {
             }
           }
         },
-        rule_2 = {
-          name    = "rule2"
-          enabled = true
+        rule2 = {
           filters = {
             filter_specs = {
               prefix_match = ["container1/prefix3"]

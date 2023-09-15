@@ -22,9 +22,9 @@ resource "azurerm_storage_account" "sa" {
   )
 
   blob_properties {
-    last_access_time_enabled      = try(var.storage.blob_properties.enable.last_access_time, false)
-    versioning_enabled            = try(var.storage.blob_properties.enable.versioning, false)
-    change_feed_enabled           = try(var.storage.blob_properties.enable.change_feed, false)
+    last_access_time_enabled      = try(var.storage.blob_properties.last_access_time, false)
+    versioning_enabled            = try(var.storage.blob_properties.versioning, false)
+    change_feed_enabled           = try(var.storage.blob_properties.change_feed, false)
     change_feed_retention_in_days = try(var.storage.blob_properties.change_feed_retention_in_days, null)
     default_service_version       = try(var.storage.blob_properties.default_service_version, "2020-06-12")
 
@@ -43,19 +43,19 @@ resource "azurerm_storage_account" "sa" {
     }
 
     delete_retention_policy {
-      days = try(var.storage.blob_properties.policy.delete_retention_in_days, 7)
+      days = try(var.storage.blob_properties.delete_retention_in_days, 7)
     }
 
     dynamic "restore_policy" {
-      for_each = try(var.storage.blob_properties.enable.retention_policy, false) == true ? [1] : []
+      for_each = try(var.storage.blob_properties.restore_policy, false) == true ? [1] : []
 
       content {
-        days = try(var.storage.blob_properties.policy.restore_in_days, 5)
+        days = try(var.storage.blob_properties.restore_in_days, 5)
       }
     }
 
     container_delete_retention_policy {
-      days = try(var.storage.blob_properties.policy.container_delete_retention_in_days, 7)
+      days = try(var.storage.blob_properties.container_delete_retention_in_days, 7)
     }
   }
 
@@ -112,7 +112,7 @@ resource "azurerm_storage_account" "sa" {
       delete                = try(var.storage.queue_properties.logging.delete, false)
       read                  = try(var.storage.queue_properties.logging.read, false)
       write                 = try(var.storage.queue_properties.logging.write, false)
-      retention_policy_days = try(var.storage.queue_properties.logging.retention_policy_days, 7)
+      retention_policy_days = try(var.storage.queue_properties.logging.retention_in_days, 7)
     }
 
     minute_metrics {
@@ -123,7 +123,7 @@ resource "azurerm_storage_account" "sa" {
     }
 
     hour_metrics {
-      enabled               = try(var.storage.queue_properties.hour_metrics.enabled, false)
+      enabled               = try(var.storage.queue_properties.hour_metrics.enable, false)
       version               = try(var.storage.queue_properties.hour_metrics.version, "1.0")
       include_apis          = try(var.storage.queue_properties.hour_metrics.include_apis, false)
       retention_policy_days = try(var.storage.queue_properties.hour_metrics.retention_policy_days, 7)
@@ -220,16 +220,16 @@ resource "azurerm_storage_table" "st" {
 
 # management policies
 resource "azurerm_storage_management_policy" "mgmt_policy" {
-  for_each = try(var.storage.management_policy, null) != null ? { "default" = var.storage.management_policy } : {}
+  for_each = try(var.storage.mgt_policy, null) != null ? { "default" = var.storage.mgt_policy } : {}
 
   storage_account_id = azurerm_storage_account.sa.id
 
   dynamic "rule" {
-    for_each = try(var.storage.mgt_policies.rules, {})
+    for_each = try(var.storage.mgt_policy.rules, {})
 
     content {
-      name    = rule.value.name
-      enabled = rule.value.enabled
+      name    = try(rule.value.name, rule.key)
+      enabled = try(rule.value.enabled, true)
 
       dynamic "filters" {
         for_each = try(rule.value.filters, {})
