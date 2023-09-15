@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.8.0...v0.9.0) (2023-09-15)
+
+
+### Features
+
+* improved structure and some cleanups ([#35](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/35)) ([b35dbed](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/b35dbed78450cb7d983730eb513912314bfe4acd))
+
 ## [0.8.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.7.0...v0.8.0) (2023-09-08)
 
 
