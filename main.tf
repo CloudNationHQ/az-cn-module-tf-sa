@@ -296,3 +296,4 @@ resource "azurerm_advanced_threat_protection" "prot" {
   target_resource_id = azurerm_storage_account.sa.id
   enabled            = true
 }
+
