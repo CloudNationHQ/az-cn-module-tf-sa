@@ -1,3 +1,5 @@
+data "azurerm_subscription" "current" {}
+
 # storage accounts
 resource "azurerm_storage_account" "sa" {
   name                     = var.storage.name
