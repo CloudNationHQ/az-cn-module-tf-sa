@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.9.0...v0.10.0) (2023-09-18)
+
+
+### Features
+
+* add extended tests ([#42](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/42)) ([59cd1b1](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/59cd1b1fbe1df8a4be91ab17cde024db064688e9))
+* **deps:** bump github.com/stretchr/testify in /tests ([#44](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/44)) ([b4c3e8d](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/b4c3e8deab2454c777a02d7e088d753592fb12b4))
+
 ## [0.9.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.8.0...v0.9.0) (2023-09-15)
 
 
