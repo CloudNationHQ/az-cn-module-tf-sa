@@ -12,51 +12,63 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+type StorageDetails struct {
+	ResourceGroupName string
+	Name              string
+}
+
+type ClientSetup struct {
+	SubscriptionID string
+	StorageClient  *armstorage.AccountsClient
+}
+
+func (details *StorageDetails) GetStorage(t *testing.T, client *armstorage.AccountsClient) *armstorage.Account {
+	resp, err := client.GetProperties(context.Background(), details.ResourceGroupName, details.Name, nil)
+	require.NoError(t, err, "Failed to get storage account")
+	return &resp.Account
+}
+
+func (setup *ClientSetup) InitializeStorageClient(t *testing.T, cred *azidentity.DefaultAzureCredential) {
+	var err error
+	setup.StorageClient, err = armstorage.NewAccountsClient(setup.SubscriptionID, cred, nil)
+	require.NoError(t, err, "Failed to initialize storage client")
+}
+
 func TestStorage(t *testing.T) {
-	t.Run("verifyStorage", func(t *testing.T) {
+	t.Run("VerifyStorage", func(t *testing.T) {
 		t.Parallel()
 
-		tfOptions := shared.GetTerraformOptions("../examples/complete")
-		defer shared.Cleanup(t, tfOptions)
-		terraform.InitAndApply(t, tfOptions)
-
-		storage := terraform.OutputMap(t, tfOptions, "storage")
-		saName, ok := storage["name"]
-		require.True(t, ok, "storage name not found in terraform output")
-
-		resourceGroupName, ok := storage["resource_group_name"]
-		require.True(t, ok, "Resource group name not found in terraform output")
-
-		subscriptionId := terraform.Output(t, tfOptions, "subscriptionId")
-		require.NotEmpty(t, subscriptionId, "Subscription ID not found in terraform output")
-
 		cred, err := azidentity.NewDefaultAzureCredential(nil)
-		if err != nil {
-			t.Fatalf("Failed to get credentials: %v", err)
+		require.NoError(t, err, "Failed to get credentials")
+
+		tfOpts := shared.GetTerraformOptions("../examples/complete")
+		defer shared.Cleanup(t, tfOpts)
+		terraform.InitAndApply(t, tfOpts)
+
+		storageMap := terraform.OutputMap(t, tfOpts, "storage")
+		subscriptionID := terraform.Output(t, tfOpts, "subscriptionId")
+
+		storageDetails := &StorageDetails{
+			ResourceGroupName: storageMap["resource_group_name"],
+			Name:              storageMap["name"],
 		}
 
-		client, err := armstorage.NewAccountsClient(subscriptionId, cred, nil)
-		if err != nil {
-			t.Fatalf("Failed to get storage client: %v", err)
-		}
-
-		resp, err := client.GetProperties(context.Background(), resourceGroupName, saName, nil)
-		if err != nil {
-			t.Fatalf("Failed to get storage account: %v", err)
-		}
+		clientSetup := &ClientSetup{SubscriptionID: subscriptionID}
+		clientSetup.InitializeStorageClient(t, cred)
+		storage := storageDetails.GetStorage(t, clientSetup.StorageClient)
 
 		t.Run("verifyStorage", func(t *testing.T) {
-			verifiyStorage(t, saName, &resp.Account)
+			verifyStorage(t, storageDetails, storage)
 		})
 	})
 }
 
-func verifiyStorage(t *testing.T, saName string, storage *armstorage.Account) {
+func verifyStorage(t *testing.T, details *StorageDetails, storage *armstorage.Account) {
 	t.Helper()
 
 	require.Equal(
 		t,
-		saName,
+		details.Name,
 		*storage.Name,
 		"Storage name does not match expected value",
 	)
@@ -65,12 +77,12 @@ func verifiyStorage(t *testing.T, saName string, storage *armstorage.Account) {
 		t,
 		"Succeeded",
 		string(*storage.Properties.ProvisioningState),
-		"Storage provisioning is not Succeeded",
+		"Storage provisioning state is not succeeded",
 	)
 
 	require.True(
 		t,
-		strings.HasPrefix(saName, "st"),
-		"Storage name does not begin with the right abbreviation",
+		strings.HasPrefix(details.Name, "st"),
+		"Storage name does not start with the right abbreviation",
 	)
 }
