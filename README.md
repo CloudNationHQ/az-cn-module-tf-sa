@@ -10,6 +10,8 @@ The structure of the module promotes reusability. It's intended to be a repeatab
 
 A primary goal is to utilize keys and values in the object that correspond to the REST API's structure. This enables us to carry out iterations, increasing its practical value as time goes on.
 
+A last key goal is to separate logic from configuration in the module, thereby enhancing its scalability, ease of customization, and manageability.
+
 ## Features
 
 - offers support for shares, tables, containers, and queues.
@@ -233,7 +235,12 @@ module "storage" {
 
 | Name | Description |
 | :-- | :-- |
-| `sa` | contains all storage accounts |
+| `account` | contains all storage account config |
+| `subscriptionId` | contains the id of the current subscription |
+| `containers` | contains all containers config |
+| `shares` | contains all file shares config |
+| `queues` | contains all queues config |
+| `tables` | contains all tables config |
 
 ## Testing
 
