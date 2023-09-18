@@ -1,5 +1,5 @@
 output "storage" {
-  value     = module.storage.sa
+  value     = module.storage.account
   sensitive = true
 }
 
