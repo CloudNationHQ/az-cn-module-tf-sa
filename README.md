@@ -242,6 +242,14 @@ module "storage" {
 | `queues` | contains all queues config |
 | `tables` | contains all tables config |
 
+## Examples
+
+- [multiple storage accounts](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/multiple/main.tf)
+- [storage account using multiple queues](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/queues/main.tf)
+- [storage account using multiple containers](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/containers-blob/main.tf)
+- [storage account using multiple shares](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/shares/main.tf)
+- [management policy with multiple rules ](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
+
 ## Testing
 
 As a prerequirement, please ensure that both go and terraform are properly installed on your system.
