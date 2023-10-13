@@ -20,6 +20,7 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - utilization of terratest for robust validation.
 - facilitates cors to securely control access to assets across different domains.
 - enables active directory based authentication for azure file Shares, enhancing file access security.
+
 The below examples shows the usage when consuming the module:
 
 ## Usage: simple
