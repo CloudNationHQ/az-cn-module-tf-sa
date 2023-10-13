@@ -19,7 +19,7 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - provides advanced threat protection capabilities.
 - utilization of terratest for robust validation.
 - facilitates cors to securely control access to assets across different domains.
-- enables active directory based authentication for azure file Shares, enhancing file access security.
+- supports optional active directory authentication for enhanced security in azure file shares.
 
 The below examples shows the usage when consuming the module:
 
