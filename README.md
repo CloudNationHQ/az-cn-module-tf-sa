@@ -141,23 +141,8 @@ module "storage" {
 In scenarios where Azure File Shares require Active Directory-based authentication, employ the following optional configuration:
 
 ```hcl
-module "storage" {
-  source = "github.com/cloudnationhq/az-cn-module-tf-sa"
-
-  naming = local.naming
-
-  storage = {
-    name          = module.naming.storage_account.name_unique
-    location      = module.rg.groups.demo.location
-    resourcegroup = module.rg.groups.demo.name
 
     share_properties = {
-      smb = {
-        versions             = ["SMB3.1.1"]
-        authentication_types = ["Kerberos"]
-        multichannel_enabled = false
-      }
-
       authentication = {
         type = "AD"
         active_directory = {
@@ -169,19 +154,7 @@ module "storage" {
           netbios_domain_name = "ACMECORP"
         }
       }
-
-      shares = {
-        fs1 = {
-          quota = 50
-          metadata = {
-            environment = "dev"
-            owner       = "finance team"
-          }
-        }
-      }
     }
-  }
-}
 ```
 
 ## Usage: management policy
