@@ -138,7 +138,7 @@ module "storage" {
 }
 ```
 
-In scenarios where Azure File Shares require Active Directory-based authentication, employ the following optional configuration:
+In scenarios where azure file shares require active directory-based authentication, employ the following optional configuration:
 
 ```hcl
 
