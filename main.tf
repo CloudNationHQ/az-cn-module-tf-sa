@@ -93,6 +93,26 @@ resource "azurerm_storage_account" "sa" {
     }
   }
 
+  dynamic "azure_files_authentication" {
+    for_each = try(var.storage.share_properties.authentication, null) != null ? { auth = var.storage.share_properties.authentication } : {}
+
+    content {
+      directory_type = try(azure_files_authentication.value.type, "AD")
+
+      dynamic "active_directory" {
+        for_each = azure_files_authentication.value.type == "AD" ? [azure_files_authentication.value.active_directory] : []
+
+        content {
+          domain_name         = active_directory.value.domain_name
+          domain_guid         = active_directory.value.domain_guid
+          forest_name         = try(active_directory.value.forest_name, null)
+          domain_sid          = try(active_directory.value.domain_sid, null)
+          storage_sid         = try(active_directory.value.storage_sid, null)
+          netbios_domain_name = try(active_directory.value.netbios_domain_name, null)
+        }
+      }
+    }
+  }
 
   queue_properties {
     dynamic "cors_rule" {
