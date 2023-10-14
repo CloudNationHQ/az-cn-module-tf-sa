@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.11.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.10.0...v0.11.0) (2023-10-14)
+
+
+### Features
+
+* add required provider section in all examples and updated documentation ([#51](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/51)) ([b41a48b](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/b41a48b7dfb7b8491315224b8525a614ef235ee0))
+* add support for optional azure file share active directory base… ([#53](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/53)) ([a5430c1](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/a5430c1928365c582e4a2fc42bf8a606789d7ea2))
+* **deps:** bump golang.org/x/net from 0.14.0 to 0.17.0 in /tests ([#49](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/49)) ([c7f6c0f](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/c7f6c0f69f5f2e8a87438260a3bb24e4e6ce6e38))
+* small update documentation ([#45](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/45)) ([c299df8](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/c299df805ec1dbbabcde3ffee2b2a44e9b4d3480))
+
 ## [0.10.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.9.0...v0.10.0) (2023-09-18)
 
 
