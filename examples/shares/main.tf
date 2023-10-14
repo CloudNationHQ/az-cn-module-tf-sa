@@ -26,16 +26,10 @@ module "storage" {
     resourcegroup = module.rg.groups.demo.name
 
     share_properties = {
-      authentication = {
-        type = "AD"
-        active_directory = {
-          domain_name         = "corp.acmeinc.net"
-          domain_guid         = "d10a8b2e-0fc1-4d5c-b456-abcdef785612"
-          forest_name         = "acme-forest.local"
-          domain_sid          = "S-1-5-21-0123487654-0123476543-0123456543-0123"
-          storage_sid         = "S-1-5-21-3623811015-3361044348-30300820"
-          netbios_domain_name = "ACMECORP"
-        }
+      smb = {
+        versions             = ["SMB3.1.1"]
+        authentication_types = ["Kerberos"]
+        multichannel_enabled = false
       }
 
       shares = {
