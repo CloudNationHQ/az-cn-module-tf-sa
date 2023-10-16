@@ -330,7 +330,7 @@ module "private_dns" {
 - [storage account using multiple containers](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/containers-blob/main.tf)
 - [storage account using multiple shares](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/shares/main.tf)
 - [management policy with multiple rules](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
-- [storage account using private endpoint](https://github.com/cloudnationhq/az/cn-module-tf-sa/tree/main/examples/private-endpoint/main.tf)
+- [storage account using private endpoint](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/private-endpoint/main.tf)
 
 ## Testing
 
