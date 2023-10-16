@@ -316,12 +316,12 @@ module "private_dns" {
 
 | Name | Description |
 | :-- | :-- |
-| `account` | contains all storage account config |
-| `subscriptionId` | contains the id of the current subscription |
-| `containers` | contains all containers config |
-| `shares` | contains all file shares config |
-| `queues` | contains all queues config |
-| `tables` | contains all tables config |
+| `account` | configuration details of the storage account |
+| `subscriptionId` | id of the current azure subscription |
+| `containers` | configuration for all blob containers |
+| `shares` | configuration details for file shares |
+| `queues` | configuration specifics for all queues |
+| `tables` | configuration details for storage tables |
 
 ## Examples
 
