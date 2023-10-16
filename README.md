@@ -252,6 +252,44 @@ module "storage" {
 }
 ```
 
+## Usage: private link
+
+```hcl
+module "storage" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-sa"
+
+  storage = {
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
+
+    private_endpoint = {
+      name         = module.naming.private_endpoint.name
+      dns_zones    = [module.private_dns.zone.id]
+      subnet       = module.network.subnets.sn1.id
+      subresources = ["blob"]
+    }
+  }
+}
+```
+
+To enable private link, use the private dns submodule provided below. This is essential because the enterprise scale module leverages centrally managed dns zones within a connectivity subscription, and our submodule utilizes an aliased provider to integrate seamlessly.
+
+```hcl
+module "private_dns" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-sa/modules/private-dns"
+
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  zone = {
+    name          = "privatelink.blob.core.windows.net"
+    resourcegroup = "rg-dns-shared-001"
+    vnet          = module.network.vnet.id
+  }
+}
+```
 
 ## Resources
 
