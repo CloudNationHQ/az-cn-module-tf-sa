@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "sa" {
 
   allow_nested_items_to_be_public  = try(var.storage.enable.allow_public_nested_items, true)
   shared_access_key_enabled        = try(var.storage.enable.shared_access_key, true)
-  public_network_access_enabled    = try(var.storage.enable.public_network_access, true)
+  public_network_access_enabled    = try(var.storage.enable.public_network_access, false)
   is_hns_enabled                   = try(var.storage.enable.is_hns, false)
   nfsv3_enabled                    = try(var.storage.enable.nfsv3, false)
   cross_tenant_replication_enabled = try(var.storage.enable.cross_tenant_replication, true)
@@ -317,4 +317,26 @@ resource "azurerm_advanced_threat_protection" "prot" {
 
   target_resource_id = azurerm_storage_account.sa.id
   enabled            = true
+}
+
+# private endpoint
+resource "azurerm_private_endpoint" "endpoint" {
+  for_each = contains(keys(var.storage), "private_endpoint") ? { "default" = var.storage.private_endpoint } : {}
+
+  name                = var.storage.private_endpoint.name
+  location            = var.storage.location
+  resource_group_name = var.storage.resourcegroup
+  subnet_id           = var.storage.private_endpoint.subnet
+
+  private_service_connection {
+    name                           = "endpoint"
+    is_manual_connection           = try(each.value.is_manual_connection, false)
+    private_connection_resource_id = azurerm_storage_account.sa.id
+    subresource_names              = each.value.subresources
+  }
+
+  private_dns_zone_group {
+    name                 = "default"
+    private_dns_zone_ids = var.storage.private_endpoint.dns_zones
+  }
 }

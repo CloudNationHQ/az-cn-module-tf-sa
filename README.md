@@ -20,6 +20,7 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - utilization of terratest for robust validation.
 - facilitates cors to securely control access to assets across different domains.
 - supports optional active directory authentication for enhanced security in azure file shares.
+- integrates seamlessly with private endpoint capabilities for direct and secure connectivity.
 
 The below examples shows the usage when consuming the module:
 
@@ -252,6 +253,44 @@ module "storage" {
 }
 ```
 
+## Usage: private endpoint
+
+```hcl
+module "storage" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-sa"
+
+  storage = {
+    name          = module.naming.storage_account.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
+
+    private_endpoint = {
+      name         = module.naming.private_endpoint.name
+      dns_zones    = [module.private_dns.zone.id]
+      subnet       = module.network.subnets.sn1.id
+      subresources = ["blob"]
+    }
+  }
+}
+```
+
+To enable private link, the below private dns submodule can be employed:
+
+```hcl
+module "private_dns" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-sa/modules/private-dns"
+
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  zone = {
+    name          = "privatelink.blob.core.windows.net"
+    resourcegroup = "rg-dns-shared-001"
+    vnet          = module.network.vnet.id
+  }
+}
+```
 
 ## Resources
 
@@ -290,7 +329,8 @@ module "storage" {
 - [storage account using multiple queues](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/queues/main.tf)
 - [storage account using multiple containers](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/containers-blob/main.tf)
 - [storage account using multiple shares](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/shares/main.tf)
-- [management policy with multiple rules ](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
+- [management policy with multiple rules](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
+- [storage account using private endpoint](https://github.com/cloudnationhq/az/cn-module-tf-sa/tree/main/examples/private-endpoint/main.tf)
 
 ## Testing
 
@@ -311,6 +351,8 @@ Each of these tests contributes to the robustness and resilience of the module. 
 Using a dedicated module, we've developed a naming convention for resources that's based on specific regular expressions for each type, ensuring correct abbreviations and offering flexibility with multiple prefixes and suffixes
 
 Full examples detailing all usages, along with integrations with dependency modules, are located in the examples directory
+
+To integrate seamlessly with the enterprise scale's centrally managed private dns zones within a connectivity subscription, you can employ the private dns submodule, designed to work effectively with an aliased provider.
 
 ## Authors
 
