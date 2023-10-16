@@ -252,7 +252,7 @@ module "storage" {
 }
 ```
 
-## Usage: private link
+## Usage: private endpoint
 
 ```hcl
 module "storage" {
@@ -273,8 +273,6 @@ module "storage" {
 }
 ```
 
-To enable private link, use the private dns submodule provided below. This is essential because the enterprise scale module leverages centrally managed dns zones within a connectivity subscription, and our submodule utilizes an aliased provider to integrate seamlessly.
-
 ```hcl
 module "private_dns" {
   source = "github.com/cloudnationhq/az-cn-module-tf-sa/modules/private-dns"
@@ -290,6 +288,7 @@ module "private_dns" {
   }
 }
 ```
+To enable private link, use the private dns submodule provided below. This is essential because the enterprise scale module leverages centrally managed dns zones within a connectivity subscription, and our submodule utilizes an aliased provider to integrate seamlessly.
 
 ## Resources
 
