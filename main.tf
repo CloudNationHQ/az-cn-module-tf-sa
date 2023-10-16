@@ -330,7 +330,7 @@ resource "azurerm_private_endpoint" "endpoint" {
 
   private_service_connection {
     name                           = "endpoint"
-    is_manual_connection           = false
+    is_manual_connection           = try(each.value.is_manual_connection, false)
     private_connection_resource_id = azurerm_storage_account.sa.id
     subresource_names              = each.value.subresources
   }
