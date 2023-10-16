@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.11.0...v0.12.0) (2023-10-16)
+
+
+### Features
+
+* add private endpoint support ([#55](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/55)) ([b6c744c](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/b6c744c0c4221198bd82b224eaabc9b8c7b7e3dc))
+* **deps:** bump github.com/Azure/azure-sdk-for-go/sdk/azidentity ([#54](https://github.com/CloudNationHQ/az-cn-module-tf-sa/issues/54)) ([480af27](https://github.com/CloudNationHQ/az-cn-module-tf-sa/commit/480af2758fcb577f54a60aa876bdd4c3d21e4a7d))
+
 ## [0.11.0](https://github.com/CloudNationHQ/az-cn-module-tf-sa/compare/v0.10.0...v0.11.0) (2023-10-14)
 
 
