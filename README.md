@@ -20,6 +20,7 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - utilization of terratest for robust validation.
 - facilitates cors to securely control access to assets across different domains.
 - supports optional active directory authentication for enhanced security in azure file shares.
+- integrates seamlessly with private endpoint capabilities for direct and secure connectivity.
 
 The below examples shows the usage when consuming the module:
 
@@ -328,7 +329,8 @@ module "private_dns" {
 - [storage account using multiple queues](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/queues/main.tf)
 - [storage account using multiple containers](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/containers-blob/main.tf)
 - [storage account using multiple shares](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/shares/main.tf)
-- [management policy with multiple rules ](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
+- [management policy with multiple rules](https://github.com/cloudnationhq/az-cn-module-tf-sa/tree/main/examples/management-policies/main.tf)
+- [storage account using private endpoint](https://github.com/cloudnationhq/az/cn-module-tf-sa/tree/main/examples/private-endpoint/main.tf)
 
 ## Testing
 
